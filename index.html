@@ -1,77 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zahid Anjum Intro</title>
+  <meta charset="UTF-8">
+  <title>Zahid Anjum | Intro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
+    /* Orbitron Font */
+    @font-face {
+      font-family: 'Orbitron';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/orbitron/v34/yMJMMIlzdpvBhQQL_SC3X9yhF25-T1nyxSmBoWgz.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    * {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: #0e0e0e;
-      color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: black;
+      color: #00ff88;
+      font-family: 'Orbitron', monospace;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    header {
       text-align: center;
+      padding: 40px 20px;
+      text-shadow: 0 0 15px #00ff88;
     }
+
     h1 {
-      font-size: 2.5em;
-      margin: 0.5em 0;
+      font-size: 3em;
+      animation: glow 2s infinite alternate;
     }
-    p {
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88; }
+      to { text-shadow: 0 0 20px #00ffaa, 0 0 30px #00ff88; }
+    }
+
+    .typing {
       font-size: 1.2em;
-      margin: 0.3em 0;
+      margin-top: 10px;
+      border-right: 2px solid #00ff88;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(40, end) forwards, blink 0.8s step-end infinite;
     }
-    .buttons {
-      margin-top: 1.5em;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1em;
+
+    @keyframes typing { to { width: 100%; } }
+    @keyframes blink { 50% { border-color: transparent; } }
+
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: rgba(0,255,100,0.05);
+      border: 1px solid #00ff88;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ff88aa;
     }
-    .button {
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00ffaa;
+      text-shadow: 0 0 10px #00ff88;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      padding: 8px 0;
+      border-bottom: 1px solid #00ff88;
+    }
+
+    .btn {
       display: inline-block;
-      padding: 0.8em 1.5em;
-      background: #1e1e1e;
-      border: 1px solid #333;
-      border-radius: 5px;
-      color: #f0f0f0;
-      text-decoration: none;
+      margin-top: 20px;
+      padding: 10px 25px;
+      background: #00ff88;
+      color: #000;
+      border-radius: 30px;
       font-weight: bold;
-      transition: background 0.3s;
-    }
-    .button:hover {
-      background: #333;
-    }
-    footer {
-      margin-top: 2em;
-      font-size: 0.9em;
-      color: #777;
-    }
-    a {
-      color: #4ea1ff;
+      box-shadow: 0 0 20px #00ff88;
       text-decoration: none;
+      transition: 0.3s;
     }
-    a:hover {
-      text-decoration: underline;
+
+    .btn:hover {
+      background: #00dd77;
+      box-shadow: 0 0 30px #00ff88;
+    }
+
+    footer {
+      text-align: center;
+      margin: 50px 0 20px;
+      font-size: 0.9em;
+      color: #888;
+      text-shadow: 0 0 10px #00ff88;
     }
   </style>
 </head>
 <body>
+
+<canvas id="matrix"></canvas>
+
+<header>
   <h1>Zahid Anjum</h1>
-  <p>Email: <a href="mailto:info.zahidanjum@gmail.com">info.zahidanjum@gmail.com</a></p>
-  <p>WhatsApp: <a href="https://wa.me/923156957521">0315-6957521</a></p>
+  <div class="typing">| Web Developer | App Developer | Designer |</div>
+</header>
 
-  <div class="buttons">
-    <a href="https://instagram.com/zahidanjumkhokhar" class="button" target="_blank">My Instagram</a>
-  </div>
+<section>
+  <h2>About Me</h2>
+  <p>I am a Web Developer and App Developer with experience in creating modern web interfaces and automation tools.</p>
+</section>
 
-  <footer>
-    &copy; 2025 Zahid Anjum. All rights reserved.
-  </footer>
+<section>
+  <h2>Skills</h2>
+  <ul>
+    <li>HTML, CSS, JavaScript</li>
+    <li>Graphics Design</li>
+    <li>Mobile App Modding & Automation</li>
+    <li>Custom Tool Development</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Contact</h2>
+  <p>Email: info.zahidanjum@gmail.com</p>
+  <p>WhatsApp: 0315-6957521</p>
+  <a href="https://instagram.com/zahidanjumkhokhar" class="btn" target="_blank">My Instagram</a>
+</section>
+
+<footer>
+  © 2025 Zahid Anjum | All Rights Reserved
+</footer>
+
+<script>
+  // Matrix Background Effect
+  const canvas = document.getElementById('matrix');
+  const ctx = canvas.getContext('2d');
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+  const letters = '101010100111000111001';
+  const fontSize = 16;
+  const columns = canvas.width / fontSize;
+  const drops = Array.from({ length: columns }).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#00ff88';
+    ctx.font = fontSize + 'px monospace';
+
+    drops.forEach((y, i) => {
+      const text = letters[Math.floor(Math.random() * letters.length)];
+      ctx.fillText(text, i * fontSize, y * fontSize);
+      if (y * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    });
+  }
+
+  setInterval(drawMatrix, 33);
+</script>
+
 </body>
 </html>
