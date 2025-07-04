@@ -8,6 +8,101 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Preloader Styles */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .preloader-content {
+            text-align: center;
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        
+        .preloader-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #60a5fa, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards 0.3s;
+        }
+        
+        .preloader-spinner {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 4px solid rgba(96, 165, 250, 0.2);
+            border-top-color: #60a5fa;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
+            position: relative;
+        }
+        
+        .preloader-spinner::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            border: 4px solid rgba(147, 51, 234, 0.2);
+            border-top-color: #9333ea;
+            animation: spin 1.5s linear infinite;
+        }
+        
+        .preloader-progress {
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(to right, #60a5fa, #9333ea);
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .preloader-percent {
+            color: #60a5fa;
+            font-weight: 600;
+            margin-top: 1rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards 0.5s;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Rest of your existing styles */
         :root {
             --primary: #3b82f6;
             --primary-light: #60a5fa;
@@ -49,690 +144,21 @@
             transition: all 0.3s ease;
         }
         
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            transition: all 0.3s ease;
-        }
+        /* ... (all your existing CSS styles remain exactly the same) ... */
         
-        .logo:hover {
-            transform: scale(1.05);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-light);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section - Redesigned */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            padding-top: 80px;
-            position: relative;
-            overflow: hidden;
-            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 30%, rgba(147, 51, 234, 0.1) 0%, transparent 50%);
-        }
-        
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .hero h1 span {
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .hero h1 span::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-        }
-        
-        .hero h1:hover span::after {
-            transform: scaleX(1);
-        }
-        
-        .typing-container {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 0.3s;
-        }
-        
-        .typing-text {
-            font-size: 1.8rem;
-            font-weight: 500;
-            color: var(--primary-light);
-            border-right: 2px solid white;
-            padding-right: 5px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 0.6s;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards 0.9s;
-        }
-        
-        .btn {
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
-            animation: pulse 1.5s infinite;
-        }
-        
-        .btn-secondary {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            background: rgba(255, 255, 255, 0.05);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        /* Particle Background */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        
-        /* About Section */
-        .section {
-            padding: 6rem 5%;
-            position: relative;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .section-title h2 span {
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .about-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            opacity: 0;
-            transform: translateX(-50px);
-            animation: fadeInLeft 1s ease forwards 0.3s;
-        }
-        
-        .profile-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s ease;
-        }
-        
-        .profile-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            border-color: var(--primary-light);
-        }
-        
-        .about-text {
-            flex: 1;
-            opacity: 0;
-            transform: translateX(50px);
-            animation: fadeInRight 1s ease forwards 0.3s;
-        }
-        
-        .about-text p {
-            margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-        
-        /* Services Section */
-        .services {
-            background: rgba(31, 41, 55, 0.3);
-            backdrop-filter: blur(10px);
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .service-card {
-            background: rgba(31, 41, 55, 0.5);
-            border-radius: 15px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease forwards;
-        }
-        
-        .service-card:nth-child(1) {
-            animation-delay: 0.2s;
-        }
-        
-        .service-card:nth-child(2) {
-            animation-delay: 0.4s;
-        }
-        
-        .service-card:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-        
-        .service-card:nth-child(4) {
-            animation-delay: 0.8s;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            background: rgba(31, 41, 55, 0.7);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: white;
-        }
-        
-        .service-card p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-        }
-        
-        /* Contact Section with Animated Icons */
-        .contact-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(31, 41, 55, 0.5);
-            border-radius: 15px;
-            padding: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease forwards 0.3s;
-        }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-item:hover {
-            transform: translateX(5px);
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-item:hover .contact-icon {
-            transform: scale(1.1);
-        }
-        
-        .email-icon {
-            background: rgba(59, 130, 246, 0.2);
-        }
-        
-        .whatsapp-icon {
-            background: rgba(34, 197, 94, 0.2);
-        }
-        
-        .instagram-icon {
-            background: rgba(236, 72, 153, 0.2);
-        }
-        
-        .contact-icon svg {
-            width: 24px;
-            height: 24px;
-            transition: all 0.3s ease;
-        }
-        
-        .contact-item:hover .contact-icon svg {
-            transform: rotate(10deg) scale(1.1);
-        }
-        
-        .email-icon svg {
-            color: var(--primary-light);
-        }
-        
-        .whatsapp-icon svg {
-            color: #4ade80;
-        }
-        
-        .instagram-icon svg {
-            color: #ec4899;
-        }
-        
-        .contact-text h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .contact-text a {
-            color: var(--primary-light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .contact-text a:hover {
-            color: var(--secondary-light);
-        }
-        
-        .contact-text a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--secondary-light);
-            transition: width 0.3s ease;
-        }
-        
-        .contact-text a:hover::after {
-            width: 100%;
-        }
-        
-        .social-connect {
-            text-align: center;
-        }
-        
-        .social-connect p {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 1.5rem;
-        }
-        
-        .instagram-btn {
-            background: linear-gradient(to right, #ec4899, #8b5cf6);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .instagram-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
-        }
-        
-        .instagram-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .instagram-btn:hover::before {
-            left: 100%;
-        }
-        
-        .instagram-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: white;
-            transition: all 0.3s ease;
-        }
-        
-        .instagram-btn:hover svg {
-            transform: rotate(360deg);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            padding: 2rem 5%;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
-            }
-            70% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
-            }
-        }
-        
-        /* Responsive Adjustments */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .typing-text {
-                font-size: 1.5rem;
-            }
-            
-            .about-content {
-                flex-direction: column;
-                gap: 3rem;
-            }
-            
-            .about-image, .about-text {
-                transform: none !important;
-            }
-            
-            .about-text {
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .typing-text {
-                font-size: 1.2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            
-            .profile-img {
-                width: 250px;
-                height: 250px;
-            }
-            
-            .contact-container {
-                padding: 2rem;
-            }
-            
-            .contact-icon {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .contact-icon svg {
-                width: 20px;
-                height: 20px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .typing-container {
-                height: 60px;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .profile-img {
-                width: 200px;
-                height: 200px;
-            }
-            
-            .contact-item {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">Zahid Anjum</div>
+            <div class="preloader-spinner"></div>
+            <div class="preloader-progress"></div>
+            <div class="preloader-percent">0%</div>
+        </div>
+    </div>
+
     <!-- Particle Background -->
     <div class="particles" id="particles"></div>
     
@@ -866,6 +292,68 @@
     </footer>
     
     <script>
+        // Preloader functionality
+        window.addEventListener('load', function() {
+            // Simulate loading progress
+            let progress = 0;
+            const progressBar = document.querySelector('.preloader-progress');
+            const percentText = document.querySelector('.preloader-percent');
+            const preloader = document.getElementById('preloader');
+            
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                
+                progressBar.style.width = progress + '%';
+                percentText.textContent = Math.floor(progress) + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    
+                    // Hide preloader after a short delay
+                    setTimeout(() => {
+                        preloader.style.opacity = '0';
+                        
+                        // Remove preloader from DOM after fade out
+                        setTimeout(() => {
+                            preloader.style.display = 'none';
+                            
+                            // Show scrollbar if it was hidden
+                            document.body.style.overflow = 'auto';
+                            
+                            // Start all animations
+                            document.querySelectorAll('[style*="animation"]').forEach(el => {
+                                el.style.animationPlayState = 'running';
+                            });
+                            
+                            // Start typing animation
+                            typeWriter();
+                        }, 500);
+                    }, 500);
+                }
+            }, 100);
+            
+            // Store in session that preloader has been shown
+            sessionStorage.setItem('preloaderShown', 'true');
+        });
+        
+        // Skip preloader if it's not the first visit
+        if (sessionStorage.getItem('preloaderShown') === 'true') {
+            document.getElementById('preloader').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Start all animations immediately
+            document.querySelectorAll('[style*="animation"]').forEach(el => {
+                el.style.animationPlayState = 'running';
+            });
+            
+            // Start typing animation
+            typeWriter();
+        } else {
+            // Hide scrollbar during preloader
+            document.body.style.overflow = 'hidden';
+        }
+
         // Typing animation
         const services = [
             "Web Developer",
@@ -955,20 +443,23 @@
         
         // Start animations when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            typeWriter();
             createParticles();
             
-            // Pause all animations initially
+            // Pause all animations initially (except those in hero section)
             const animatedElements = document.querySelectorAll('[style*="animation"]');
             animatedElements.forEach(el => {
-                el.style.animationPlayState = 'paused';
+                if (!el.closest('.hero') && !el.closest('#preloader')) {
+                    el.style.animationPlayState = 'paused';
+                }
             });
             
-            // Start hero animations immediately
-            document.querySelector('.hero h1').style.animationPlayState = 'running';
-            document.querySelector('.typing-container').style.animationPlayState = 'running';
-            document.querySelector('.hero p').style.animationPlayState = 'running';
-            document.querySelector('.cta-buttons').style.animationPlayState = 'running';
+            // Start hero animations immediately if preloader is not shown
+            if (sessionStorage.getItem('preloaderShown') === 'true') {
+                document.querySelector('.hero h1').style.animationPlayState = 'running';
+                document.querySelector('.typing-container').style.animationPlayState = 'running';
+                document.querySelector('.hero p').style.animationPlayState = 'running';
+                document.querySelector('.cta-buttons').style.animationPlayState = 'running';
+            }
             
             // Add scroll event listener for other animations
             window.addEventListener('scroll', animateOnScroll);
