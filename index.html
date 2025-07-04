@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,125 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Preloader Styles - Added at the top */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .preloader-container {
+            position: relative;
+            width: 60vw;
+            height: 60vw;
+            max-width: 300px;
+            max-height: 300px;
+            filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.7));
+            perspective: 800px;
+        }
+
+        .ball {
+            position: absolute;
+            top: -80px;
+            left: calc(50% - 30px);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at 30% 30%, #60a5fa, #9333ea);
+            border-radius: 50%;
+            box-shadow:
+              0 0 30px #60a5fa,
+              0 0 60px #9333ea,
+              0 0 90px rgba(147, 51, 234, 0.5);
+            animation:
+              fall 0.8s ease-out forwards,
+              bounce 0.6s ease-out forwards 0.8s,
+              explode 0.4s forwards 1.4s,
+              rotate3D 2s linear infinite;
+            z-index: 10;
+        }
+
+        @keyframes fall {
+            to { top: 180px; }
+        }
+        @keyframes bounce {
+            0% { top: 180px; transform: scale(1); }
+            50% { top: 120px; transform: scale(1.4); }
+            100% { top: 180px; transform: scale(1); }
+        }
+        @keyframes explode {
+            100% {
+              opacity: 0;
+              transform: scale(3);
+            }
+        }
+        @keyframes rotate3D {
+            to { transform: rotateY(360deg) rotateX(360deg); }
+        }
+
+        .preloader-text {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(10deg);
+            font-size: 6vw;
+            max-font-size: 36px;
+            font-weight: 700;
+            font-family: 'Orbitron','Arial',sans-serif;
+            background: linear-gradient(90deg, #60a5fa, #9333ea, #60a5fa);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+            opacity: 0;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(96,165,250,0.6);
+            animation:
+              fadeIn 0.5s forwards 1.8s,
+              shine 2s linear infinite 2.3s;
+            overflow: hidden;
+        }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes shine { to { background-position: 200% center; } }
+        .preloader-text::after {
+            content: '';
+            position: absolute;
+            right: -8px;
+            width: 3px;
+            height: 40px;
+            background: #9333ea;
+            animation: blink 0.8s infinite 2.3s;
+        }
+        @keyframes blink {
+            0%,49% {opacity:1;}
+            50%,100% {opacity:0;}
+        }
+
+        .binary {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.2;
+        }
+        .binary span {
+            position: absolute;
+            color: #60a5fa;
+            font-size: 12px;
+            animation: fallBinary linear infinite;
+        }
+        @keyframes fallBinary {
+            to { transform: translateY(100vh); }
+        }
+
+        /* Original Website Styles Below - No Changes Made */
         :root {
             --primary: #3b82f6;
             --primary-light: #60a5fa;
@@ -733,6 +852,16 @@
     </style>
 </head>
 <body>
+    <!-- Preloader - Added at the top of body -->
+    <div id="preloader" aria-hidden="true">
+        <div class="preloader-container" role="presentation">
+            <div class="binary" id="binary"></div>
+            <div class="ball"></div>
+            <div class="preloader-text" id="type-text"></div>
+        </div>
+    </div>
+    
+    <!-- Original Website Content Below - No Changes Made -->
     <!-- Particle Background -->
     <div class="particles" id="particles"></div>
     
@@ -866,95 +995,150 @@
     </footer>
     
     <script>
-        // Typing animation
-        const services = [
-            "Web Developer",
-            "E-commerce Expert",
-            "Graphic Designer",
-            "Social Media Marketer"
-        ];
-        
-        let currentService = 0;
-        let displayText = '';
-        let isTyping = true;
-        let timeout;
-        
-        function typeWriter() {
-            const typingText = document.getElementById('typing-text');
-            
-            if (isTyping) {
-                if (displayText.length < services[currentService].length) {
-                    displayText = services[currentService].substring(0, displayText.length + 1);
-                    typingText.textContent = displayText;
-                    timeout = setTimeout(typeWriter, 100);
-                } else {
-                    timeout = setTimeout(() => {
-                        isTyping = false;
-                        typeWriter();
-                    }, 2000);
-                }
-            } else {
-                if (displayText.length > 0) {
-                    displayText = displayText.substring(0, displayText.length - 1);
-                    typingText.textContent = displayText;
-                    timeout = setTimeout(typeWriter, 50);
-                } else {
-                    currentService = (currentService + 1) % services.length;
-                    isTyping = true;
-                    timeout = setTimeout(typeWriter, 500);
+        // Preloader Script - Added at the top of the script section
+        document.addEventListener('DOMContentLoaded', function() {
+            const textEl = document.getElementById('type-text');
+            const binaryEl = document.getElementById('binary');
+            const preloader = document.getElementById('preloader');
+            const text = 'ZAHID ANJUM';
+            let index = 0;
+
+            function createBinary(){
+                const count = 30;
+                for(let i=0;i<count;i++){
+                    const span = document.createElement('span');
+                    span.textContent = Math.random()>0.5?'1':'0';
+                    span.style.left = Math.random()*100+'%';
+                    span.style.animationDuration = (Math.random()*5+3)+'s';
+                    span.style.animationDelay = Math.random()*5+'s';
+                    binaryEl.appendChild(span);
                 }
             }
-        }
-        
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Particle background
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = Math.floor(window.innerWidth / 10);
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random size between 1px and 3px
-                const size = Math.random() * 2 + 1;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random position
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                // Random opacity
-                particle.style.opacity = Math.random() * 0.5 + 0.1;
-                
-                // Random animation duration and delay
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 5;
-                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // Initialize animations when elements come into view
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.section-title, .service-card, .contact-container, .about-image, .about-text');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if (elementPosition < screenPosition) {
-                    element.style.animationPlayState = 'running';
+            createBinary();
+
+            setTimeout(()=>{
+                textEl.style.animation='fadeIn 0.4s forwards';
+                const type = () => {
+                    if(index<text.length){
+                        textEl.textContent+=text[index];
+                        index++;
+                        setTimeout(type,Math.random()*60+40);
+                    }
+                };
+                type();
+            },1800);
+
+            setTimeout(()=>{
+                preloader.style.opacity='0';
+                setTimeout(()=>{
+                    preloader.style.display='none';
+                    // Start website animations after preloader hides
+                    initWebsiteAnimations();
+                },500);
+            },4000);
+
+            // Fallback hide after 8s
+            setTimeout(()=>{
+                if(preloader.style.display!=='none'){
+                    preloader.style.opacity='0';
+                    setTimeout(()=>{
+                        preloader.style.display='none';
+                        initWebsiteAnimations();
+                    },500);
                 }
-            });
-        };
-        
-        // Start animations when page loads
-        document.addEventListener('DOMContentLoaded', () => {
+            },8000);
+        });
+
+        function initWebsiteAnimations() {
+            // Original Website Scripts Below - No Changes Made
+            // Typing animation
+            const services = [
+                "Web Developer",
+                "E-commerce Expert",
+                "Graphic Designer",
+                "Social Media Marketer"
+            ];
+            
+            let currentService = 0;
+            let displayText = '';
+            let isTyping = true;
+            let timeout;
+            
+            function typeWriter() {
+                const typingText = document.getElementById('typing-text');
+                
+                if (isTyping) {
+                    if (displayText.length < services[currentService].length) {
+                        displayText = services[currentService].substring(0, displayText.length + 1);
+                        typingText.textContent = displayText;
+                        timeout = setTimeout(typeWriter, 100);
+                    } else {
+                        timeout = setTimeout(() => {
+                            isTyping = false;
+                            typeWriter();
+                        }, 2000);
+                    }
+                } else {
+                    if (displayText.length > 0) {
+                        displayText = displayText.substring(0, displayText.length - 1);
+                        typingText.textContent = displayText;
+                        timeout = setTimeout(typeWriter, 50);
+                    } else {
+                        currentService = (currentService + 1) % services.length;
+                        isTyping = true;
+                        timeout = setTimeout(typeWriter, 500);
+                    }
+                }
+            }
+            
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Particle background
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = Math.floor(window.innerWidth / 10);
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Random size between 1px and 3px
+                    const size = Math.random() * 2 + 1;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Random position
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    // Random opacity
+                    particle.style.opacity = Math.random() * 0.5 + 0.1;
+                    
+                    // Random animation duration and delay
+                    const duration = Math.random() * 20 + 10;
+                    const delay = Math.random() * 5;
+                    particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            
+            // Initialize animations when elements come into view
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.section-title, .service-card, .contact-container, .about-image, .about-text');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.animationPlayState = 'running';
+                    }
+                });
+            };
+            
+            // Start website animations
             typeWriter();
             createParticles();
             
@@ -974,66 +1158,66 @@
             window.addEventListener('scroll', animateOnScroll);
             // Trigger once on load in case elements are already visible
             animateOnScroll();
-        });
-        
-        // Mobile menu toggle
-        const mobileMenu = document.querySelector('.mobile-menu-btn');
-        const closeMenu = document.getElementById('close-menu');
-        const overlay = document.getElementById('overlay');
-        const mobileNav = document.getElementById('mobile-menu');
-        
-        mobileMenu.addEventListener('click', () => {
-            mobileNav.classList.add('open');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeMenu.addEventListener('click', () => {
-            mobileNav.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        overlay.addEventListener('click', () => {
-            mobileNav.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+            
+            // Mobile menu toggle
+            const mobileMenu = document.querySelector('.mobile-menu-btn');
+            const closeMenu = document.getElementById('close-menu');
+            const overlay = document.getElementById('overlay');
+            const mobileNav = document.getElementById('mobile-menu');
+            
+            mobileMenu.addEventListener('click', () => {
+                mobileNav.classList.add('open');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeMenu.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            overlay.addEventListener('click', () => {
+                mobileNav.classList.remove('open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
                     
-                    // Close mobile menu if open
-                    if (window.innerWidth <= 768) {
-                        mobileNav.classList.remove('open');
-                        overlay.classList.remove('active');
-                        document.body.style.overflow = '';
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (window.innerWidth <= 768) {
+                            mobileNav.classList.remove('open');
+                            overlay.classList.remove('active');
+                            document.body.style.overflow = '';
+                        }
                     }
+                });
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
                 }
             });
-        });
-        
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+        }
     </script>
 </body>
 </html>
