@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Preloader Styles - Added at the top */
+        /* Preloader Styles */
         #preloader {
             position: fixed;
             top: 0;
@@ -126,7 +126,7 @@
             to { transform: translateY(100vh); }
         }
 
-        /* Original Website Styles Below - No Changes Made */
+        /* Main Website Styles */
         :root {
             --primary: #3b82f6;
             --primary-light: #60a5fa;
@@ -223,7 +223,7 @@
             cursor: pointer;
         }
         
-        /* Hero Section - Redesigned */
+        /* Enhanced Hero Section with Advanced Animations */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -232,8 +232,29 @@
             padding-top: 80px;
             position: relative;
             overflow: hidden;
-            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 30%, rgba(147, 51, 234, 0.1) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 30%, rgba(147, 51, 234, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(96, 165, 250, 0.05) 0%, transparent 30%),
+                radial-gradient(circle at 70% 30%, rgba(147, 51, 234, 0.05) 0%, transparent 30%);
+            animation: pulseBackground 15s ease infinite alternate;
+            z-index: -1;
+        }
+        
+        @keyframes pulseBackground {
+            0% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+            100% { opacity: 0.3; transform: scale(1); }
         }
         
         .hero-content {
@@ -245,7 +266,7 @@
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             line-height: 1.2;
@@ -253,10 +274,7 @@
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .hero h1 span {
-            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            background: linear-gradient(to right, white, var(--primary-light), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -264,7 +282,7 @@
             display: inline-block;
         }
         
-        .hero h1 span::after {
+        .hero h1::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -277,7 +295,7 @@
             transition: transform 0.5s ease;
         }
         
-        .hero h1:hover span::after {
+        .hero h1:hover::after {
             transform: scaleX(1);
         }
         
@@ -293,27 +311,49 @@
         }
         
         .typing-text {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 500;
-            color: var(--primary-light);
-            border-right: 2px solid white;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            border-right: 2px solid var(--secondary-light);
             padding-right: 5px;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         
         .hero p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
             max-width: 700px;
             margin: 0 auto 2.5rem;
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards 0.6s;
+            position: relative;
+        }
+        
+        .hero p::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .hero p:hover::after {
+            opacity: 1;
+            width: 100px;
         }
         
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
             flex-wrap: wrap;
             opacity: 0;
@@ -322,37 +362,63 @@
         }
         
         .btn {
-            padding: 0.8rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: inline-block;
             position: relative;
             overflow: hidden;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
         }
         
         .btn-primary {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             color: white;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 5px 20px rgba(59, 130, 246, 0.4);
+            transform-style: preserve-3d;
         }
         
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.6);
             animation: pulse 1.5s infinite;
         }
         
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
         .btn-secondary {
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             color: white;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
         }
         
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
         }
         
         /* Particle Background */
@@ -447,7 +513,7 @@
             line-height: 1.8;
         }
         
-        /* Enhanced Services Section with Advanced Animations */
+        /* Enhanced Services Section */
         .services {
             background: rgba(31, 41, 55, 0.3);
             backdrop-filter: blur(10px);
@@ -644,17 +710,56 @@
             100% { transform: translateY(0) translateX(0) rotate(360deg); }
         }
         
-        /* Contact Section with Animated Icons */
+        /* Enhanced Contact Section with Advanced Animations */
+        .contact {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(96, 165, 250, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 70% 30%, rgba(147, 51, 234, 0.1) 0%, transparent 30%);
+            animation: rotateGradient 30s linear infinite reverse;
+            z-index: -1;
+        }
+        
         .contact-container {
             max-width: 800px;
             margin: 0 auto;
-            background: rgba(31, 41, 55, 0.5);
-            border-radius: 15px;
+            background: rgba(31, 41, 55, 0.6);
+            border-radius: 20px;
             padding: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
             opacity: 0;
             transform: translateY(50px);
             animation: fadeInUp 1s ease forwards 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(96, 165, 250, 0.1),
+                transparent
+            );
+            z-index: -1;
         }
         
         .contact-info {
@@ -668,66 +773,128 @@
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: 0.5s;
+        }
+        
+        .contact-item:hover::before {
+            left: 100%;
         }
         
         .contact-item:hover {
-            transform: translateX(5px);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
         
         .contact-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            opacity: 0.5;
+            filter: blur(5px);
+            z-index: -1;
         }
         
         .contact-item:hover .contact-icon {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(10deg);
         }
         
         .email-icon {
-            background: rgba(59, 130, 246, 0.2);
+            background: linear-gradient(45deg, var(--primary), var(--primary-light));
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
         
         .whatsapp-icon {
-            background: rgba(34, 197, 94, 0.2);
+            background: linear-gradient(45deg, #34d399, #4ade80);
+            box-shadow: 0 5px 15px rgba(52, 211, 153, 0.4);
         }
         
         .instagram-icon {
-            background: rgba(236, 72, 153, 0.2);
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.4);
         }
         
         .contact-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 28px;
+            height: 28px;
             transition: all 0.3s ease;
         }
         
         .contact-item:hover .contact-icon svg {
-            transform: rotate(10deg) scale(1.1);
+            transform: scale(1.2);
         }
         
         .email-icon svg {
-            color: var(--primary-light);
+            color: white;
         }
         
         .whatsapp-icon svg {
-            color: #4ade80;
+            color: white;
         }
         
         .instagram-icon svg {
-            color: #ec4899;
+            color: white;
         }
         
         .contact-text h3 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 0.5rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .contact-text h3::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            transition: width 0.4s ease;
+        }
+        
+        .contact-item:hover .contact-text h3::after {
+            width: 100%;
         }
         
         .contact-text a {
@@ -735,6 +902,7 @@
             text-decoration: none;
             transition: all 0.3s ease;
             position: relative;
+            font-weight: 500;
         }
         
         .contact-text a:hover {
@@ -758,32 +926,53 @@
         
         .social-connect {
             text-align: center;
+            margin-top: 3rem;
         }
         
         .social-connect p {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .social-connect p::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+            transition: all 0.3s ease;
+        }
+        
+        .social-connect:hover p::after {
+            width: 80px;
         }
         
         .instagram-btn {
-            background: linear-gradient(to right, #ec4899, #8b5cf6);
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
             color: white;
-            padding: 0.8rem 2rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 20px rgba(236, 72, 153, 0.4);
             position: relative;
             overflow: hidden;
+            font-size: 1.1rem;
         }
         
         .instagram-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.6);
         }
         
         .instagram-btn::before {
@@ -793,7 +982,12 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
             transition: 0.5s;
         }
         
@@ -802,10 +996,10 @@
         }
         
         .instagram-btn svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             fill: white;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
         }
         
         .instagram-btn:hover svg {
@@ -815,9 +1009,26 @@
         /* Footer */
         footer {
             background: var(--dark);
-            padding: 2rem 5%;
+            padding: 3rem 5%;
             text-align: center;
             color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary));
+        }
+        
+        footer p {
+            position: relative;
+            z-index: 1;
         }
         
         /* Animations */
@@ -881,7 +1092,7 @@
         /* Responsive Adjustments */
         @media (max-width: 992px) {
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 3rem;
             }
             
             .typing-text {
@@ -937,13 +1148,13 @@
             }
             
             .contact-icon {
-                width: 40px;
-                height: 40px;
+                width: 50px;
+                height: 50px;
             }
             
             .contact-icon svg {
-                width: 20px;
-                height: 20px;
+                width: 24px;
+                height: 24px;
             }
         }
         
@@ -979,11 +1190,16 @@
                 flex-direction: column;
                 text-align: center;
             }
+            
+            .instagram-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Preloader - Added at the top of body -->
+    <!-- Preloader -->
     <div id="preloader" aria-hidden="true">
         <div class="preloader-container" role="presentation">
             <div class="binary" id="binary"></div>
@@ -992,7 +1208,6 @@
         </div>
     </div>
     
-    <!-- Original Website Content Below - No Changes Made -->
     <!-- Particle Background -->
     <div class="particles" id="particles"></div>
     
@@ -1014,7 +1229,7 @@
         </button>
     </header>
     
-    <!-- Hero Section -->
+    <!-- Enhanced Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Hi, I'm <span>Zahid Anjum</span></h1>
@@ -1046,7 +1261,7 @@
         </div>
     </section>
     
-    <!-- Enhanced Services Section -->
+    <!-- Services Section -->
     <section id="services" class="section services">
         <div class="section-title">
             <h2>My <span>Services</span></h2>
@@ -1075,8 +1290,8 @@
         </div>
     </section>
     
-    <!-- Contact Section -->
-    <section id="contact" class="section">
+    <!-- Enhanced Contact Section -->
+    <section id="contact" class="section contact">
         <div class="section-title">
             <h2>Get In <span>Touch</span></h2>
         </div>
@@ -1126,7 +1341,7 @@
     </footer>
     
     <script>
-        // Preloader Script - Added at the top of the script section
+        // Preloader Script
         document.addEventListener('DOMContentLoaded', function() {
             const textEl = document.getElementById('type-text');
             const binaryEl = document.getElementById('binary');
@@ -1163,7 +1378,6 @@
                 preloader.style.opacity='0';
                 setTimeout(()=>{
                     preloader.style.display='none';
-                    // Start website animations after preloader hides
                     initWebsiteAnimations();
                 },500);
             },4000);
@@ -1181,7 +1395,6 @@
         });
 
         function initWebsiteAnimations() {
-            // Original Website Scripts Below - No Changes Made
             // Typing animation
             const services = [
                 "Web Developer",
