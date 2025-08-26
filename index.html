@@ -150,31 +150,18 @@
             color: white;
             overflow-x: hidden;
             line-height: 1.6;
+            cursor: none; /* Hide default cursor */
         }
         
-        /* Desktop-only cursor styles */
-        @media (min-width: 1025px) {
-            body {
-                cursor: none; /* Hide default cursor only on desktop */
-            }
-            
-            /* Enhanced Fluid Cursor Canvas */
-            #fluid-cursor {
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 999999;
-                pointer-events: none;
-                width: 100%;
-                height: 100%;
-                display: block;
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            #fluid-cursor {
-                display: none; /* Hide custom cursor on mobile/tablet */
-            }
+        /* Fluid Cursor Canvas */
+        #fluid-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999999;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
         }
         
         /* Header Styles */
@@ -551,6 +538,7 @@
             overflow: hidden;
             font-size: 1.1rem;
             border: none;
+            cursor: none; /* Hide default cursor */
         }
         
         .btn-primary {
@@ -1040,7 +1028,6 @@
             opacity: 0.5;
             filter: blur(5px);
             z-index: -1;
-            transition: all 0.3s ease;
         }
         
         .contact-item:hover .contact-icon {
@@ -1409,7 +1396,7 @@
     </style>
 </head>
 <body>
-    <!-- Fluid Cursor Canvas - Desktop Only -->
+    <!-- Fluid Cursor Canvas -->
     <canvas id="fluid-cursor"></canvas>
     
     <!-- Preloader -->
@@ -1567,14 +1554,8 @@
     </footer>
     
     <script>
-        // Enhanced Fluid Cursor Effect - Desktop Only
+        // Fluid Cursor Effect
         (function() {
-            // Only run on desktop devices
-            if (window.innerWidth < 1025) {
-                document.body.style.cursor = 'auto';
-                return;
-            }
-            
             const canvas = document.getElementById('fluid-cursor');
             const ctx = canvas.getContext('2d');
             
@@ -1588,7 +1569,7 @@
             
             // Trail particles
             const particles = [];
-            const particleCount = 12;
+            const particleCount = 10;
             const colors = [
                 {r: 96, g: 165, b: 250},    // #60a5fa - sky blue
                 {r: 147, g: 51, b: 234},    // #9333ea - bright purple
@@ -1601,14 +1582,12 @@
                 particles.push({
                     x: 0,
                     y: 0,
-                    size: Math.random() * 12 + 4,
+                    size: Math.random() * 15 + 5,
                     color: colors[Math.floor(Math.random() * colors.length)],
                     vx: 0,
                     vy: 0,
-                    friction: 0.88 + Math.random() * 0.04,
-                    ease: Math.random() * 0.08 + 0.04,
-                    angle: 0,
-                    angleSpeed: Math.random() * 0.2 - 0.1
+                    friction: 0.85 + Math.random() * 0.05,
+                    ease: Math.random() * 0.1 + 0.05
                 });
             }
             
@@ -1618,80 +1597,57 @@
                 mouseY = e.clientY;
             });
             
-            // Animation loop with performance optimization
-            let lastTime = 0;
-            const fps = 60;
-            const frameInterval = 1000 / fps;
+            // Touch move event
+            document.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                mouseX = e.touches[0].clientX;
+                mouseY = e.touches[0].clientY;
+            });
             
-            function animate(timestamp) {
-                if (!lastTime) lastTime = timestamp;
-                const deltaTime = timestamp - lastTime;
+            // Animation loop
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
-                if (deltaTime > frameInterval) {
-                    lastTime = timestamp - (deltaTime % frameInterval);
+                // Update and draw particles
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
                     
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    
-                    // Update and draw particles
-                    for (let i = 0; i < particles.length; i++) {
-                        const p = particles[i];
-                        
-                        // Leader particle follows mouse directly
-                        if (i === 0) {
-                            p.x += (mouseX - p.x) * p.ease;
-                            p.y += (mouseY - p.y) * p.ease;
-                        } 
-                        // Other particles follow the previous particle
-                        else {
-                            const prevP = particles[i - 1];
-                            p.x += (prevP.x - p.x) * p.ease;
-                            p.y += (prevP.y - p.y) * p.ease;
-                        }
-                        
-                        // Apply velocity and friction
-                        p.x += p.vx;
-                        p.y += p.vy;
-                        p.vx *= p.friction;
-                        p.vy *= p.friction;
-                        
-                        // Rotate particles
-                        p.angle += p.angleSpeed;
-                        
-                        // Draw particle with rotation
-                        ctx.save();
-                        ctx.translate(p.x, p.y);
-                        ctx.rotate(p.angle);
-                        
-                        // Draw a more interesting shape (rounded rectangle)
-                        ctx.beginPath();
-                        ctx.roundRect(-p.size/2, -p.size/2, p.size, p.size, p.size/4);
-                        
-                        // Use color with alpha if defined
-                        if (p.color.a !== undefined) {
-                            ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.color.a})`;
-                        } else {
-                            ctx.fillStyle = `rgb(${p.color.r}, ${p.color.g}, ${p.color.b})`;
-                        }
-                        
-                        ctx.fill();
-                        
-                        // Add glow effect
-                        ctx.shadowBlur = 12;
-                        ctx.shadowColor = p.color.a !== undefined 
-                            ? `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.color.a})`
-                            : `rgb(${p.color.r}, ${p.color.g}, ${p.color.b})`;
-                        
-                        ctx.restore();
+                    // Leader particle follows mouse directly
+                    if (i === 0) {
+                        p.x += (mouseX - p.x) * p.ease;
+                        p.y += (mouseY - p.y) * p.ease;
+                    } 
+                    // Other particles follow the previous particle
+                    else {
+                        const prevP = particles[i - 1];
+                        p.x += (prevP.x - p.x) * p.ease;
+                        p.y += (prevP.y - p.y) * p.ease;
                     }
                     
-                    // Draw main cursor (a simple circle with glow)
+                    // Apply velocity and friction
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vx *= p.friction;
+                    p.vy *= p.friction;
+                    
+                    // Draw particle
                     ctx.beginPath();
-                    ctx.arc(particles[0].x, particles[0].y, 6, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    
+                    // Use color with alpha if defined
+                    if (p.color.a !== undefined) {
+                        ctx.fillStyle = `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.color.a})`;
+                    } else {
+                        ctx.fillStyle = `rgb(${p.color.r}, ${p.color.g}, ${p.color.b})`;
+                    }
+                    
                     ctx.fill();
                     
+                    // Add glow effect
                     ctx.shadowBlur = 15;
-                    ctx.shadowColor = 'rgba(147, 51, 234, 0.7)';
+                    ctx.shadowColor = p.color.a !== undefined 
+                        ? `rgba(${p.color.r}, ${p.color.g}, ${p.color.b}, ${p.color.a})`
+                        : `rgb(${p.color.r}, ${p.color.g}, ${p.color.b})`;
                 }
                 
                 requestAnimationFrame(animate);
@@ -1701,17 +1657,10 @@
             window.addEventListener('resize', () => {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-                
-                // Reinitialize cursor if switching between desktop/mobile
-                if (window.innerWidth < 1025) {
-                    document.body.style.cursor = 'auto';
-                } else {
-                    document.body.style.cursor = 'none';
-                }
             });
             
             // Start animation
-            requestAnimationFrame(animate);
+            animate();
         })();
 
         // Preloader Script
@@ -2008,3 +1957,4 @@
     </script>
 </body>
 </html>
+
