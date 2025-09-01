@@ -2554,7 +2554,7 @@
 </html>
 <section id="testimonials" class="testimonials-section">
     <div class="testimonial-header">
-        <h2>What My <span>Clients Say</span></h2>
+        <h2><span class="gradient-text">What My</span> <span class="white-text">Clients Say</span></h2>
         <p>Hear from businesses I've helped with web development, e-commerce, and digital marketing</p>
     </div>
 
@@ -2721,17 +2721,22 @@
             font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 15px;
+        }
+        
+        .gradient-text {
             background: linear-gradient(to right, #60a5fa, #9333ea);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-        }
-        
-        .testimonial-header h2 span {
             position: relative;
         }
         
-        .testimonial-header h2 span::after {
+        .white-text {
+            color: white;
+            position: relative;
+        }
+        
+        .white-text::after {
             content: '';
             position: absolute;
             bottom: -5px;
@@ -2912,6 +2917,7 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
             border-color: transparent;
+            color: white;
         }
         
         .testimonial-nav:hover::before {
@@ -3639,3 +3645,4 @@
     </script>
 </body>
 </html>
+
