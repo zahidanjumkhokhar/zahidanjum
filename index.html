@@ -570,6 +570,7 @@
                 transparent
             );
             transition: 0.5s;
+            z-index: -1;
         }
         
         .btn-primary:hover::before {
@@ -905,6 +906,199 @@
             50% { transform: translateY(0) translateX(100px) rotate(180deg); }
             75% { transform: translateY(50px) translateX(50px) rotate(270deg); }
             100% { transform: translateY(0) translateX(0) rotate(360deg); }
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 30% 70%, rgba(96, 165, 250, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 70% 30%, rgba(147, 51, 234, 0.1) 0%, transparent 30%);
+            animation: rotateGradient 30s linear infinite;
+            z-index: -1;
+        }
+        
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+        
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background: rgba(31, 41, 55, 0.5);
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            cursor: none;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-item {
+            background: rgba(31, 41, 55, 0.5);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-item:nth-child(1) { animation-delay: 0.2s; }
+        .portfolio-item:nth-child(2) { animation-delay: 0.4s; }
+        .portfolio-item:nth-child(3) { animation-delay: 0.6s; }
+        .portfolio-item:nth-child(4) { animation-delay: 0.8s; }
+        .portfolio-item:nth-child(5) { animation-delay: 1s; }
+        .portfolio-item:nth-child(6) { animation-delay: 1.2s; }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(96, 165, 250, 0.3);
+        }
+        
+        .portfolio-img {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+        
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(59, 130, 246, 0.2), rgba(147, 51, 234, 0.7));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .portfolio-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .portfolio-item:hover .portfolio-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .portfolio-link:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        
+        .portfolio-link:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        
+        .portfolio-link:hover {
+            background: white;
+            transform: translateY(-5px);
+        }
+        
+        .portfolio-link svg {
+            width: 20px;
+            height: 20px;
+            color: var(--dark);
+        }
+        
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+        
+        .portfolio-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+        
+        .portfolio-info p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .portfolio-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(96, 165, 250, 0.2);
+            color: var(--primary-light);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
         
         /* Enhanced Contact Section with Advanced Animations */
@@ -1287,6 +1481,12 @@
         }
         
         /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
         @media (max-width: 992px) {
             .hero h1 {
                 font-size: 3rem;
@@ -1307,6 +1507,10 @@
             
             .about-text {
                 text-align: center;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             }
         }
         
@@ -1338,6 +1542,20 @@
             .profile-img {
                 width: 250px;
                 height: 250px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .portfolio-filters {
+                gap: 0.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
             }
             
             .contact-container {
@@ -1383,6 +1601,18 @@
                 height: 200px;
             }
             
+            .portfolio-img {
+                height: 200px;
+            }
+            
+            .portfolio-info {
+                padding: 1rem;
+            }
+            
+            .portfolio-info h3 {
+                font-size: 1.2rem;
+            }
+            
             .contact-item {
                 flex-direction: column;
                 text-align: center;
@@ -1418,6 +1648,7 @@
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
             <a href="#contact">Contact</a>
         </nav>
         <button class="mobile-menu-btn">
@@ -1457,7 +1688,7 @@
             <p>I create digital experiences that help businesses grow and succeed online.</p>
             <div class="cta-buttons">
                 <a href="#contact" class="btn btn-primary">Get in Touch</a>
-                <a href="#services" class="btn btn-secondary">My Services</a>
+                <a href="#portfolio" class="btn btn-secondary">View Portfolio</a>
             </div>
         </div>
     </section>
@@ -1503,6 +1734,801 @@
         </div>
     </section>
     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: #0f172a;
+            color: #f8fafc;
+            line-height: 1.6;
+        }
+        
+        .section {
+            padding: 100px 5%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title span {
+            color: #6366f1;
+            text-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border-radius: 2px;
+        }
+        
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+        }
+        
+        .portfolio-item.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .portfolio-img {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+        
+        .portfolio-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-img img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), rgba(99, 102, 241, 0.7));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-actions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .portfolio-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+        }
+        
+        .portfolio-item:hover .portfolio-link {
+            transform: translateY(0);
+        }
+        
+        .portfolio-link:hover {
+            background: #6366f1;
+            transform: scale(1.1) !important;
+        }
+        
+        .portfolio-link:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+        
+        .portfolio-link:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+        
+        .portfolio-info {
+            padding: 25px;
+            background: #1e293b;
+            position: relative;
+        }
+        
+        .portfolio-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #e2e8f0;
+        }
+        
+        .portfolio-info p {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .portfolio-tag {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        /* Decorative Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(40px);
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: #6366f1;
+            top: 10%;
+            left: 5%;
+            animation: float 15s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: #8b5cf6;
+            bottom: 15%;
+            right: 5%;
+            animation: float 12s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section portfolio">
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        
+        <div class="section-title">
+            <h2>My <span>Portfolio</span></h2>
+        </div>
+        
+        <div class="portfolio-grid">
+            <!-- Project 1 -->
+ <div class="portfolio-item" data-category="web">
+            <div class="portfolio-img">
+                <img src="https://i.postimg.cc/cJhzPKPN/471343228-122127763676517339-3834208243296860142-n.jpg" alt="Haram Organics">
+                <div class="portfolio-overlay">
+                    <div class="portfolio-actions">
+                        <a href="https://www.facebook.com/HaramOrganics/" target="_blank" class="portfolio-link">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="https://www.facebook.com/HaramOrganics/" target="_blank" class="portfolio-link">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-info">
+                <h3>Haram Organics</h3>
+                <p>Complete redesign of a business website with social media marketing and modern brand management</p>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Management</span>
+                    <span class="portfolio-tag">Marketing</span>
+                    <span class="portfolio-tag">Shopify Development</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+<div class="portfolio-item" data-category="Lumino Cosmetics ">
+    <div class="portfolio-img">
+        <img src="https://i.postimg.cc/gJb4N3YD/IMG-20230831-WA0021.jpg" alt="E-commerce Store">
+        <div class="portfolio-overlay">
+            <div class="portfolio-actions">
+                <a href="https://www.facebook.com/officialluminocosmetics" target="_blank" class="portfolio-link">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://www.facebook.com/officialluminocosmetics" target="_blank" class="portfolio-link">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-info">
+        <h3>Lumino Cosmetics </h3>
+        <p>Complete design of a modern website with social media marketing and effective brand management tools</p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Shopify Development</span>
+            <span class="portfolio-tag">Marketing </span>
+            <span class="portfolio-tag">Management</span>
+        </div>
+    </div>
+</div>
+
+            
+            <!-- Project 3 -->
+<div class="portfolio-item" data-category="Taffy Cat Food">
+    <div class="portfolio-img">
+        <img src="https://i.postimg.cc/FswSyNFb/340fca5b-c995-41f8-b9fa-177ec92dced6.jpg" alt="Taffy Cat Food">
+        <div class="portfolio-overlay">
+            <div class="portfolio-actions">
+                <a href="https://www.facebook.com/taffycatfood" target="_blank" class="portfolio-link">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://www.facebook.com/taffycatfood" target="_blank" class="portfolio-link">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-info">
+        <h3>Taffy Cat Food</h3>
+        <p>Design and launch of a responsive website with digital marketing support and long-term brand management.</p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Shopify Development</span>
+            <span class="portfolio-tag">Management</span>
+            <span class="portfolio-tag">Marketing</span>
+        </div>
+    </div>
+</div>
+
+            
+            <!-- Project 4 -->
+<div class="portfolio-item" data-category="web">
+    <div class="portfolio-img">
+        <img src="https://i.postimg.cc/RVJ6Vy1W/469043901-122144865602375261-929712291499337330-n.jpg" alt="visionsensesoforganics.com">
+        <div class="portfolio-overlay">
+            <div class="portfolio-actions">
+                <a href="https://www.facebook.com/heavenhome786" target="_blank" class="portfolio-link">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://www.facebook.com/heavenhome786" target="_blank" class="portfolio-link">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-info">
+        <h3>visionsensesoforganics</h3>
+        <p>Complete development of a coffee website with modern design features and fully responsive layout.</p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Shopify Development</span>
+            <span class="portfolio-tag">Management</span>
+            <span class="portfolio-tag">Others Setting</span>
+        </div>
+    </div>
+</div>
+
+            
+            <!-- Project 5 -->
+ <div class="portfolio-item" data-category="Farhan Jewelry">
+    <div class="portfolio-img">
+        <img src="https://i.postimg.cc/Mp8TZTKL/Whats-App-Image-2025-02-21-at-15-18-33-0e095091.jpg" alt="E-commerce Store">
+        <div class="portfolio-overlay">
+            <div class="portfolio-actions">
+                <a href="https://www.facebook.com/farhansjewelry" target="_blank" class="portfolio-link">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://www.facebook.com/farhansjewelry" target="_blank" class="portfolio-link">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-info">
+        <h3>Farhans Jewelry</h3>
+        <p>Complete setup of a responsive website with integrated marketing and streamlined brand management</p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Shopify Development</span>
+            <span class="portfolio-tag">Marketing</span>
+            <span class="portfolio-tag">Management</span>
+        </div>
+    </div>
+</div>
+
+            
+            <!-- Project 6 -->
+<div class="portfolio-item" data-category="MS Foods">
+    <div class="portfolio-img">
+        <img src="https://i.postimg.cc/rm1gnWpX/CGBNHF.jpg" alt="Web Application">
+        <div class="portfolio-overlay">
+            <div class="portfolio-actions">
+                <a href="https://www.facebook.com/m.sfoodsokr" target="_blank" class="portfolio-link">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://www.facebook.com/m.sfoodsokr" target="_blank" class="portfolio-link">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-info">
+        <h3>MS Foods</h3>
+        <p>Complete management of digital marketing campaigns with improved strategies and modern brand growth.</p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Marketing</span>
+            <span class="portfolio-tag">Management</span>
+            <span class="portfolio-tag">Other Settings</span>
+        </div>
+    </div>
+</div>
+
+            
+            <!-- Project 7 -->
+<div class="portfolio-item" data-category="Daim Dawakhana">
+    <div class="portfolio-img">
+        <img src="https://i.postimg.cc/SK8GR8C2/296471814-346977184304700-3781025698917254595-n.jpg" alt="Web Application">
+        <div class="portfolio-overlay">
+            <div class="portfolio-actions">
+                <a href="https://www.facebook.com/daimdawakhanapk" target="_blank" class="portfolio-link">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://www.facebook.com/daimdawakhanapk" target="_blank" class="portfolio-link">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-info">
+        <h3>Daim Dawakhana</h3>
+        <p>Complete execution of digital marketing campaigns with improved reach and modern engagement strategies.</p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Marketing</span>
+            <span class="portfolio-tag">Page Setup</span>
+            <span class="portfolio-tag">Other Settings</span>
+        </div>
+    </div>
+</div>
+
+            <!-- Project 8 -->
+<div class="portfolio-item" data-category="Optic Aura">
+    <div class="portfolio-img">
+        <img src="https://i.postimg.cc/7h2Hw8vD/IMG-5407.jpg" alt="Social Media Strategy">
+        <div class="portfolio-overlay">
+            <div class="portfolio-actions">
+                <a href="https://opticaura.store/" target="_blank" class="portfolio-link">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+                <a href="https://opticaura.store/" target="_blank" class="portfolio-link">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="portfolio-info">
+        <h3>Optic Aura</h3>
+        <p>Complete development of a Shopify store with modern theme customization and fully responsive design.</p>
+        <div class="portfolio-tags">
+            <span class="portfolio-tag">Strategy</span>
+            <span class="portfolio-tag">Shopify Development</span>
+            <span class="portfolio-tag">Other Settings</span>
+        </div>
+    </div>
+</div>
+    </section>
+<!-- Marquee Section -->
+<section class="marquee-section">
+    <!-- Floating elements -->
+    <div class="marquee-floating">
+        <div class="marquee-shape marquee-shape-1"></div>
+        <div class="marquee-shape marquee-shape-2"></div>
+    </div>
+    
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-content">
+                <div class="marquee-item">
+                    <i class="fas fa-code marquee-icon"></i>
+                    <span class="marquee-text">There are more projects that I have done</span>
+                </div>
+                <div class="marquee-item">
+                    <i class="fas fa-laptop-code marquee-icon"></i>
+                    <span class="marquee-text">There are some demos</span>
+                </div>
+                <div class="marquee-item">
+                    <i class="fas fa-handshake marquee-icon"></i>
+                    <span class="marquee-text">Let's collaborate to make your brand to next level</span>
+                </div>
+                <div class="marquee-item">
+                    <i class="fas fa-rocket marquee-icon"></i>
+                    <span class="marquee-text">Let's create something amazing together</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <div class="marquee-cta">
+    <a href="https://wa.me/923156957521" target="_blank" class="btn btn-primary">Start Collaboration</a>
+</div>
+
+</section>
+
+<style>
+    /* Marquee Section */
+    .marquee-section {
+        padding: 5rem 5%;
+        position: relative;
+        overflow: hidden;
+        background: rgba(31, 41, 55, 0.3);
+        backdrop-filter: blur(10px);
+    }
+    
+    .marquee-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, 
+                                    rgba(147, 51, 234, 0.1) 0%, 
+                                    transparent 70%);
+        animation: rotateGradient 20s linear infinite;
+        z-index: -1;
+    }
+    
+    .marquee-container {
+        position: relative;
+        overflow: hidden;
+        padding: 25px 0;
+        background: rgba(31, 41, 55, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(96, 165, 250, 0.2);
+        margin: 30px 0;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .marquee {
+        display: flex;
+        animation: marqueeScroll 25s linear infinite;
+        padding: 15px 0;
+    }
+    
+    .marquee:hover {
+        animation-play-state: paused;
+    }
+    
+    .marquee-content {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-around;
+        white-space: nowrap;
+        min-width: 100%;
+    }
+    
+    .marquee-item {
+        display: flex;
+        align-items: center;
+        margin: 0 20px;
+        font-size: 1.4rem;
+        font-weight: 600;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .marquee-icon {
+        margin-right: 15px;
+        font-size: 1.8rem;
+        background: linear-gradient(to right, var(--primary-light), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: iconPulse 2s infinite;
+    }
+    
+    .marquee-text {
+        background: linear-gradient(to right, #e2e8f0, var(--primary-light), var(--secondary-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        position: relative;
+    }
+    
+    .marquee-text::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, var(--primary-light), var(--secondary));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+    
+    .marquee-item:hover .marquee-text::after {
+        transform: scaleX(1);
+    }
+    
+    .marquee-cta {
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    /* Floating elements */
+    .marquee-floating {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: -1;
+    }
+    
+    .marquee-shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.1;
+        filter: blur(40px);
+    }
+    
+    .marquee-shape-1 {
+        width: 300px;
+        height: 300px;
+        background: var(--primary);
+        top: 10%;
+        left: 5%;
+        animation: float 15s ease-in-out infinite;
+    }
+    
+    .marquee-shape-2 {
+        width: 200px;
+        height: 200px;
+        background: var(--secondary);
+        bottom: 15%;
+        right: 5%;
+        animation: float 12s ease-in-out infinite reverse;
+    }
+    
+    /* Animations */
+    @keyframes marqueeScroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+    
+    @keyframes iconPulse {
+        0%, 100% {
+            transform: scale(1);
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+        50% {
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(147, 51, 234, 0.7);
+        }
+    }
+    
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(10deg);
+        }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 992px) {
+        .marquee-item {
+            font-size: 1.2rem;
+            margin: 0 15px;
+        }
+        
+        .marquee-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .marquee-section {
+            padding: 3rem 5%;
+        }
+        
+        .marquee-item {
+            font-size: 1rem;
+            margin: 0 12px;
+        }
+        
+        .marquee-icon {
+            font-size: 1.3rem;
+            margin-right: 8px;
+        }
+        
+        .marquee-container {
+            padding: 20px 0;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .marquee-item {
+            font-size: 0.9rem;
+            margin: 0 8px;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .marquee-icon {
+            margin-right: 0;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .marquee-container {
+            padding: 15px 0;
+        }
+        
+        .marquee-text::after {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    // Duplicate marquee content for seamless animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const marqueeContent = document.querySelector('.marquee-content');
+        if (marqueeContent) {
+            const clone = marqueeContent.cloneNode(true);
+            document.querySelector('.marquee').appendChild(clone);
+        }
+    });
+</script>
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 1.2 &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Function to run on scroll
+            function checkScroll() {
+                portfolioItems.forEach((item, index) => {
+                    if (isInViewport(item)) {
+                        // Add delay based on index for staggered animation
+                        setTimeout(() => {
+                            item.classList.add('animate');
+                        }, index * 100);
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+        });
+    </script>
+</body>
+</html>
+    
     <!-- Enhanced Contact Section -->
     <section id="contact" class="section contact">
         <div class="section-title">
@@ -1536,7 +2562,7 @@
             </div>
             <div class="social-connect">
                 <p>Or connect with me on social media</p>
-                <a href="https://instagram.com/zahidanjumkhokhar/" target="_blank" class="instagram-btn">
+                <a href="https://instagram.com/zahidanjumkhokhar_/" target="_blank" class="instagram-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -1760,6 +2786,39 @@
                 timeout = setTimeout(typeWriter, typingSpeed);
             }
             
+            // Portfolio Filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    // Filter portfolio items
+                    portfolioItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 500);
+                        }
+                    });
+                });
+            });
+            
             // Set current year in footer
             document.getElementById('current-year').textContent = new Date().getFullYear();
             
@@ -1861,7 +2920,7 @@
             
             // Initialize animations when elements come into view
             const animateOnScroll = () => {
-                const elements = document.querySelectorAll('.section-title, .service-card, .contact-container, .about-image, .about-text');
+                const elements = document.querySelectorAll('.section-title, .service-card, .contact-container, .about-image, .about-text, .portfolio-item, .portfolio-filters');
                 
                 elements.forEach(element => {
                     const elementPosition = element.getBoundingClientRect().top;
