@@ -2240,7 +2240,319 @@
     </div>
 </div>
     </section>
-      <section id="testimonials" class="section testimonials">
+<!-- Marquee Section -->
+<section class="marquee-section">
+    <!-- Floating elements -->
+    <div class="marquee-floating">
+        <div class="marquee-shape marquee-shape-1"></div>
+        <div class="marquee-shape marquee-shape-2"></div>
+    </div>
+    
+    <div class="marquee-container">
+        <div class="marquee">
+            <div class="marquee-content">
+                <div class="marquee-item">
+                    <i class="fas fa-code marquee-icon"></i>
+                    <span class="marquee-text">There are more projects that I have done</span>
+                </div>
+                <div class="marquee-item">
+                    <i class="fas fa-laptop-code marquee-icon"></i>
+                    <span class="marquee-text">There are some demos</span>
+                </div>
+                <div class="marquee-item">
+                    <i class="fas fa-handshake marquee-icon"></i>
+                    <span class="marquee-text">Let's collaborate to make your brand to next level</span>
+                </div>
+                <div class="marquee-item">
+                    <i class="fas fa-rocket marquee-icon"></i>
+                    <span class="marquee-text">Let's create something amazing together</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <div class="marquee-cta">
+    <a href="https://wa.me/923156957521" target="_blank" class="btn btn-primary">Start Collaboration</a>
+</div>
+
+</section>
+
+<style>
+    /* Marquee Section */
+    .marquee-section {
+        padding: 5rem 5%;
+        position: relative;
+        overflow: hidden;
+        background: rgba(31, 41, 55, 0.3);
+        backdrop-filter: blur(10px);
+    }
+    
+    .marquee-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at center, 
+                                    rgba(147, 51, 234, 0.1) 0%, 
+                                    transparent 70%);
+        animation: rotateGradient 20s linear infinite;
+        z-index: -1;
+    }
+    
+    .marquee-container {
+        position: relative;
+        overflow: hidden;
+        padding: 25px 0;
+        background: rgba(31, 41, 55, 0.7);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(96, 165, 250, 0.2);
+        margin: 30px 0;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .marquee {
+        display: flex;
+        animation: marqueeScroll 25s linear infinite;
+        padding: 15px 0;
+    }
+    
+    .marquee:hover {
+        animation-play-state: paused;
+    }
+    
+    .marquee-content {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-around;
+        white-space: nowrap;
+        min-width: 100%;
+    }
+    
+    .marquee-item {
+        display: flex;
+        align-items: center;
+        margin: 0 20px;
+        font-size: 1.4rem;
+        font-weight: 600;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .marquee-icon {
+        margin-right: 15px;
+        font-size: 1.8rem;
+        background: linear-gradient(to right, var(--primary-light), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: iconPulse 2s infinite;
+    }
+    
+    .marquee-text {
+        background: linear-gradient(to right, #e2e8f0, var(--primary-light), var(--secondary-light));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        position: relative;
+    }
+    
+    .marquee-text::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, var(--primary-light), var(--secondary));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+    
+    .marquee-item:hover .marquee-text::after {
+        transform: scaleX(1);
+    }
+    
+    .marquee-cta {
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    /* Floating elements */
+    .marquee-floating {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: -1;
+    }
+    
+    .marquee-shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.1;
+        filter: blur(40px);
+    }
+    
+    .marquee-shape-1 {
+        width: 300px;
+        height: 300px;
+        background: var(--primary);
+        top: 10%;
+        left: 5%;
+        animation: float 15s ease-in-out infinite;
+    }
+    
+    .marquee-shape-2 {
+        width: 200px;
+        height: 200px;
+        background: var(--secondary);
+        bottom: 15%;
+        right: 5%;
+        animation: float 12s ease-in-out infinite reverse;
+    }
+    
+    /* Animations */
+    @keyframes marqueeScroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+    
+    @keyframes iconPulse {
+        0%, 100% {
+            transform: scale(1);
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+        50% {
+            transform: scale(1.2);
+            text-shadow: 0 0 20px rgba(147, 51, 234, 0.7);
+        }
+    }
+    
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(10deg);
+        }
+    }
+    
+    /* Responsive design */
+    @media (max-width: 992px) {
+        .marquee-item {
+            font-size: 1.2rem;
+            margin: 0 15px;
+        }
+        
+        .marquee-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .marquee-section {
+            padding: 3rem 5%;
+        }
+        
+        .marquee-item {
+            font-size: 1rem;
+            margin: 0 12px;
+        }
+        
+        .marquee-icon {
+            font-size: 1.3rem;
+            margin-right: 8px;
+        }
+        
+        .marquee-container {
+            padding: 20px 0;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .marquee-item {
+            font-size: 0.9rem;
+            margin: 0 8px;
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .marquee-icon {
+            margin-right: 0;
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+        
+        .marquee-container {
+            padding: 15px 0;
+        }
+        
+        .marquee-text::after {
+            display: none;
+        }
+    }
+</style>
+
+<script>
+    // Duplicate marquee content for seamless animation
+    document.addEventListener('DOMContentLoaded', function() {
+        const marqueeContent = document.querySelector('.marquee-content');
+        if (marqueeContent) {
+            const clone = marqueeContent.cloneNode(true);
+            document.querySelector('.marquee').appendChild(clone);
+        }
+    });
+</script>
+    <script>
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 1.2 &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Function to run on scroll
+            function checkScroll() {
+                portfolioItems.forEach((item, index) => {
+                    if (isInViewport(item)) {
+                        // Add delay based on index for staggered animation
+                        setTimeout(() => {
+                            item.classList.add('animate');
+                        }, index * 100);
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+        });
+    </script>
+</body>
+</html>
+    <section id="testimonials" class="section testimonials">
     <div class="section-title">
         <h2>Client <span>Testimonials</span></h2>
     </div>
@@ -2744,319 +3056,6 @@
         }
     </script>
 </section>
-<!-- Marquee Section -->
-<section class="marquee-section">
-    <!-- Floating elements -->
-    <div class="marquee-floating">
-        <div class="marquee-shape marquee-shape-1"></div>
-        <div class="marquee-shape marquee-shape-2"></div>
-    </div>
-    
-    <div class="marquee-container">
-        <div class="marquee">
-            <div class="marquee-content">
-                <div class="marquee-item">
-                    <i class="fas fa-code marquee-icon"></i>
-                    <span class="marquee-text">There are more projects that I have done</span>
-                </div>
-                <div class="marquee-item">
-                    <i class="fas fa-laptop-code marquee-icon"></i>
-                    <span class="marquee-text">There are some demos</span>
-                </div>
-                <div class="marquee-item">
-                    <i class="fas fa-handshake marquee-icon"></i>
-                    <span class="marquee-text">Let's collaborate to make your brand to next level</span>
-                </div>
-                <div class="marquee-item">
-                    <i class="fas fa-rocket marquee-icon"></i>
-                    <span class="marquee-text">Let's create something amazing together</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-   <div class="marquee-cta">
-    <a href="https://wa.me/923156957521" target="_blank" class="btn btn-primary">Start Collaboration</a>
-</div>
-
-</section>
-
-<style>
-    /* Marquee Section */
-    .marquee-section {
-        padding: 5rem 5%;
-        position: relative;
-        overflow: hidden;
-        background: rgba(31, 41, 55, 0.3);
-        backdrop-filter: blur(10px);
-    }
-    
-    .marquee-section::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle at center, 
-                                    rgba(147, 51, 234, 0.1) 0%, 
-                                    transparent 70%);
-        animation: rotateGradient 20s linear infinite;
-        z-index: -1;
-    }
-    
-    .marquee-container {
-        position: relative;
-        overflow: hidden;
-        padding: 25px 0;
-        background: rgba(31, 41, 55, 0.7);
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(96, 165, 250, 0.2);
-        margin: 30px 0;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-    
-    .marquee {
-        display: flex;
-        animation: marqueeScroll 25s linear infinite;
-        padding: 15px 0;
-    }
-    
-    .marquee:hover {
-        animation-play-state: paused;
-    }
-    
-    .marquee-content {
-        display: flex;
-        flex-shrink: 0;
-        align-items: center;
-        justify-content: space-around;
-        white-space: nowrap;
-        min-width: 100%;
-    }
-    
-    .marquee-item {
-        display: flex;
-        align-items: center;
-        margin: 0 20px;
-        font-size: 1.4rem;
-        font-weight: 600;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    
-    .marquee-icon {
-        margin-right: 15px;
-        font-size: 1.8rem;
-        background: linear-gradient(to right, var(--primary-light), var(--secondary));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        animation: iconPulse 2s infinite;
-    }
-    
-    .marquee-text {
-        background: linear-gradient(to right, #e2e8f0, var(--primary-light), var(--secondary-light));
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        position: relative;
-    }
-    
-    .marquee-text::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(to right, var(--primary-light), var(--secondary));
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.3s ease;
-    }
-    
-    .marquee-item:hover .marquee-text::after {
-        transform: scaleX(1);
-    }
-    
-    .marquee-cta {
-        text-align: center;
-        margin-top: 30px;
-    }
-    
-    /* Floating elements */
-    .marquee-floating {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: -1;
-    }
-    
-    .marquee-shape {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.1;
-        filter: blur(40px);
-    }
-    
-    .marquee-shape-1 {
-        width: 300px;
-        height: 300px;
-        background: var(--primary);
-        top: 10%;
-        left: 5%;
-        animation: float 15s ease-in-out infinite;
-    }
-    
-    .marquee-shape-2 {
-        width: 200px;
-        height: 200px;
-        background: var(--secondary);
-        bottom: 15%;
-        right: 5%;
-        animation: float 12s ease-in-out infinite reverse;
-    }
-    
-    /* Animations */
-    @keyframes marqueeScroll {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-100%);
-        }
-    }
-    
-    @keyframes iconPulse {
-        0%, 100% {
-            transform: scale(1);
-            text-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
-        }
-        50% {
-            transform: scale(1.2);
-            text-shadow: 0 0 20px rgba(147, 51, 234, 0.7);
-        }
-    }
-    
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0) rotate(0deg);
-        }
-        50% {
-            transform: translateY(-20px) rotate(10deg);
-        }
-    }
-    
-    /* Responsive design */
-    @media (max-width: 992px) {
-        .marquee-item {
-            font-size: 1.2rem;
-            margin: 0 15px;
-        }
-        
-        .marquee-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-    }
-    
-    @media (max-width: 768px) {
-        .marquee-section {
-            padding: 3rem 5%;
-        }
-        
-        .marquee-item {
-            font-size: 1rem;
-            margin: 0 12px;
-        }
-        
-        .marquee-icon {
-            font-size: 1.3rem;
-            margin-right: 8px;
-        }
-        
-        .marquee-container {
-            padding: 20px 0;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        .marquee-item {
-            font-size: 0.9rem;
-            margin: 0 8px;
-            flex-direction: column;
-            text-align: center;
-        }
-        
-        .marquee-icon {
-            margin-right: 0;
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-        
-        .marquee-container {
-            padding: 15px 0;
-        }
-        
-        .marquee-text::after {
-            display: none;
-        }
-    }
-</style>
-
-<script>
-    // Duplicate marquee content for seamless animation
-    document.addEventListener('DOMContentLoaded', function() {
-        const marqueeContent = document.querySelector('.marquee-content');
-        if (marqueeContent) {
-            const clone = marqueeContent.cloneNode(true);
-            document.querySelector('.marquee').appendChild(clone);
-        }
-    });
-</script>
-    <script>
-        // Animation on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const portfolioItems = document.querySelectorAll('.portfolio-item');
-            
-            // Function to check if element is in viewport
-            function isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 1.2 &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                );
-            }
-            
-            // Function to run on scroll
-            function checkScroll() {
-                portfolioItems.forEach((item, index) => {
-                    if (isInViewport(item)) {
-                        // Add delay based on index for staggered animation
-                        setTimeout(() => {
-                            item.classList.add('animate');
-                        }, index * 100);
-                    }
-                });
-            }
-            
-            // Initial check
-            checkScroll();
-            
-            // Check on scroll
-            window.addEventListener('scroll', checkScroll);
-        });
-    </script>
-</body>
-</html>
-    
     <!-- Enhanced Contact Section -->
     <section id="contact" class="section contact">
         <div class="section-title">
